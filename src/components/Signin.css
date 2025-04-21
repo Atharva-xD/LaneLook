@@ -1,0 +1,111 @@
+.signin-open::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 2000;
+  }
+  
+  .signin-overlay {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    z-index: 3000;
+  }
+  
+  .signin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+  }
+  
+  .signin-header h1 {
+    font-family: 'poppins';
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+    text-align: center;
+  }
+  
+  .signin-header .cancel-icon {
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+  }
+  
+  .signin-header .cancel-icon:hover {
+    color: #6c7ae0;
+  }
+  
+  .signin-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+  
+  .signin-content form {
+    margin-top: 20px;
+  }
+  
+  .signin-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: bold;
+  }
+  
+  .signin-content input[type="text"], .signin-content input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .signin-content button[type="submit"] {
+    background-color: #337ab7;
+    color: #fff;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .signin-content button[type="submit"]:hover {
+    background-color: #23527c;
+  }
+  
+  .signin-content .forgot-password {
+    font-size: 1.2rem;
+    color: #666;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .signin-content .forgot-password a {
+    color: #337ab7;
+    text-decoration: none;
+  }
+  
+  .signin-content .forgot-password a:hover {
+    color: #23527c;
+  }
