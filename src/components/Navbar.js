@@ -11,6 +11,7 @@ import About from "./NavLinks/About.js";
 import { motion } from "framer-motion";
 import Book from "./NavLinks/Book.js";
 import SignIn from "./SignIn.js";
+import Shop from "./NavLinks/Shop.js";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -210,7 +211,7 @@ class Navbar extends React.Component {
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/signin" element={<SignIn />} />
-          <Route path="/shop" element={<Header />} />
+          <Route path="/shop" element={<Shop />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/book" element={<Book />} />
