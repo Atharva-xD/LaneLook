@@ -6,12 +6,7 @@ import ShoppingCart from "./ShoppingCart.js";
 import glasses1 from "../images/glasses1.jpg";
 import glasses2 from "../images/glasses2.jpg";
 import { FaSearch, FaShoppingCart, FaHeart, FaTimes } from "react-icons/fa";
-import Contact from "./NavLinks/Contact.js";
-import About from "./NavLinks/About.js";
 import { motion } from "framer-motion";
-import Book from "./NavLinks/Book.js";
-import SignIn from "./SignIn.js";
-import Shop from "./NavLinks/Shop.js";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -76,7 +71,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <BrowserRouter>
+      <>
         {/* Top Navbar */}
         <div className="top-navbar">
           <div className="container d-flex justify-content-between">
@@ -142,17 +137,6 @@ class Navbar extends React.Component {
                 </li>
                 <li className="nav-item">
                   <Link
-                    to="/features"
-                    className={`nav-link ${
-                      this.state.activeTab === "features" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("features")}
-                  >
-                    Features
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
                     to="/book"
                     className={`nav-link ${
                       this.state.activeTab === "blog" ? "active" : ""
@@ -184,6 +168,17 @@ class Navbar extends React.Component {
                     Contact
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link
+                    to="/admin"
+                    className={`nav-link ${
+                      this.state.activeTab === "features" ? "active" : ""
+                    }`}
+                    onClick={() => this.handleTabClick("admin")}
+                  >
+                    Admin
+                  </Link>
+                </li>
               </ul>
               <div className="navbar-icons">
                 <motion.div className="icon" whileHover={{ scale: 1.1 }}>
@@ -207,17 +202,6 @@ class Navbar extends React.Component {
             </div>
           </div>
         </nav>
-
-        <Routes>
-          <Route exact path="/" element={<Home />} />
-          <Route exact path="/signin" element={<SignIn />} />
-          <Route path="/shop" element={<Shop />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/book" element={<Book />} />
-          <Route path="/cart" element={<ShoppingCart />} />
-        </Routes>
-
         {this.state.signInOpen && (
           <div className="signin-overlay">
             <div className="signin-header">
@@ -395,7 +379,7 @@ class Navbar extends React.Component {
             </div>
           </motion.div>
         )}
-      </BrowserRouter>
+      </>
     );
   }
 }

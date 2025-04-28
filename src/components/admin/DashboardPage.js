@@ -1,16 +1,31 @@
 import React from 'react';
+import StatsCard from './SidebarComponents/StatsCard';
+import OrdersTable from './SidebarComponents/OrdersTable';
+import UsersTable from './SidebarComponents/UsersTable';
+import ProductsChart from './SidebarComponents/ProductsChart';
+import SidebarAdmin from './Sidebar';
+import './Admin.css';
 
-function DashboardPage() {
+const AdminDashboard = () => {
   return (
-    <div className="dashboard">
-      <h1>Dashboard</h1>
-      <div className="stats">
-        <div className="stat-box">Total Products</div>
-        <div className="stat-box">Pending Orders</div>
-        <div className="stat-box">New Users</div>
+    <div className="admin-dashboard">
+      <SidebarAdmin />
+      <div className="main-content container">
+        <div className="dashboard-overview">
+          <StatsCard title="Total Users" value="1,203" icon="user" />
+          <StatsCard title="Total Sales" value="$13,205" icon="dollar" />
+          <StatsCard title="Active Orders" value="342" icon="cart" />
+        </div>
+        <div className="chart-section">
+          <ProductsChart />
+        </div>
+        <div className="tables-section">
+          <OrdersTable />
+          <UsersTable />
+        </div>
       </div>
     </div>
   );
-}
+};
 
-export default DashboardPage;
+export default AdminDashboard;

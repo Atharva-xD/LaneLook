@@ -1,18 +1,57 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Link } from "react-router-dom";
+import { FaBoxOpen } from "react-icons/fa";
+import { TbLayoutDashboard } from "react-icons/tb";
+import { MdOutlineSettings } from "react-icons/md";
+import { LuUsersRound } from "react-icons/lu";
+import { IoAnalyticsOutline } from "react-icons/io5";
+import "./Sidebar.css"
 
-function Sidebar() {
+function SidebarAdmin() {
   return (
-    <div className="sidebar">
-      <h2>Admin Portal</h2>
-      <ul>
-        <li><Link to="/">Dashboard</Link></li>
-        <li><Link to="/add-product">Add Product</Link></li>
-        <li><Link to="/update-product">Update Product</Link></li>
-        <li><Link to="/delete-product">Delete Product</Link></li>
-      </ul>
-    </div>
+      <Sidebar className="sidebar">
+        <Menu
+          menuItemStyles={{
+            button: {
+              [`&.active`]: {
+                backgroundColor: "#222222", // Active background color
+                color: "#fff", // Active text color
+              },
+
+              // Default styles for MenuItem buttons
+              color: "#fff", // Default text color
+              backgroundColor: "#222", // Default background color
+
+              "&:hover": {
+                backgroundColor: "#fff", // Background color on hover
+                color: "#222", // Text color on hover
+              },
+            },
+          }}
+        >
+          <MenuItem component={<Link to="/admin/" />}>
+            <TbLayoutDashboard className="sidebar-icon"/>
+          </MenuItem>
+
+          <MenuItem component={<Link to="/admin/productstable" />}>
+            <FaBoxOpen className="sidebar-icon"/>
+          </MenuItem>
+
+          <MenuItem component={<Link to="/admin/userstable" />}>
+            <LuUsersRound className="sidebar-icon"/>
+          </MenuItem>
+
+          <MenuItem component={<Link to="/admin/analytics" />}>
+            <IoAnalyticsOutline className="sidebar-icon"/>
+          </MenuItem>
+
+          <MenuItem component={<Link to="/admin/setting" />}>
+            <MdOutlineSettings className="sidebar-icon"/>
+          </MenuItem>
+        </Menu>
+      </Sidebar>
   );
 }
 
-export default Sidebar;
+export default SidebarAdmin;

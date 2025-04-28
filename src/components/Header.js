@@ -6,7 +6,6 @@ import glasses1 from "../images/glasses1.jpg";
 import glasses2 from "../images/glasses2.jpg";
 import glasses3 from "../images/glasses3.jpg";
 import glasses4 from "../images/glasses4.jpg";
-import '../index.css'
 
 export class Header extends Component {
   render() {
@@ -16,7 +15,7 @@ export class Header extends Component {
           <div className='col-lg-3 col-md-3 col-sm-6'>
 
             <motion.div whileHover={{ scale: 1.1 }} className='glasses'>
-              <Link to="/shop">
+              <Link to="/shop" style={{ textDecoration: 'none' }}>
                 <img src={glasses1} alt="glasses1" className='img-fluid' />
                 <h5>Eyeglasses</h5>
               </Link>
@@ -24,7 +23,7 @@ export class Header extends Component {
           </div>
           <div className='col-lg-3 col-md-3 col-sm-6'>
             <motion.div whileHover={{ scale: 1.1 }} className='glasses'>
-              <Link to="/shop">
+              <Link to="/shop" style={{ textDecoration: 'none' }}>
                 <img src={glasses2} alt="glasses2" className='img-fluid' />
                 <h5>Sunglasses</h5>
               </Link>
@@ -32,7 +31,7 @@ export class Header extends Component {
           </div>
           <div className='col-lg-3 col-md-3 col-sm-6'>
             <motion.div whileHover={{ scale: 1.1 }} className='glasses'>
-              <Link to="/shop">
+              <Link to="/shop" style={{ textDecoration: 'none' }}>
                 <img src={glasses3} alt="glasses3" className='img-fluid' />
                 <h5>Screen Glasses</h5>
               </Link>
@@ -40,7 +39,7 @@ export class Header extends Component {
           </div>
           <div className='col-lg-3 col-md-3 col-sm-6'>
             <motion.div whileHover={{ scale: 1.1 }} className='glasses'>
-              <Link to="/shop">
+              <Link to="/shop" style={{ textDecoration: 'none' }}>
                 <img src={glasses4} alt="glasses4" className='img-fluid' />
                 <h5>Power Sunglasses</h5>
               </Link>

@@ -17,7 +17,7 @@ import glasses6 from "./images/glasses6.jpg";
 const productsData = [
   {
     id: 1,
-    name: "Classic Aviator Eyeglasses",
+    name: "Classic Aviator",
     price: 7999,
     rating: 4.5,
     category: "eyeglasses",
@@ -26,7 +26,7 @@ const productsData = [
   },
   {
     id: 2,
-    name: "Vintage Round Eyeglasses",
+    name: "Vintage Round",
     price: 10399,
     rating: 4.2,
     category: "eyeglasses",
@@ -34,7 +34,7 @@ const productsData = [
   },
   {
     id: 3,
-    name: "Polarized Wayfarer Sunglasses",
+    name: "Polarized Wayfarer",
     price: 11999,
     rating: 4.8,
     category: "sunglasses",
@@ -43,7 +43,7 @@ const productsData = [
   },
   {
     id: 4,
-    name: "Sports Wrap Sunglasses",
+    name: "Sports Wrap",
     price: 15999,
     rating: 4.7,
     category: "sunglasses",
@@ -51,7 +51,7 @@ const productsData = [
   },
   {
     id: 5,
-    name: "Blue Light Blocking Glasses",
+    name: "Blue Light Blocking",
     price: 6399,
     rating: 4.3,
     category: "screen",
@@ -60,7 +60,7 @@ const productsData = [
   },
   {
     id: 6,
-    name: "Gaming Screen Glasses",
+    name: "Gaming Screen",
     price: 7199,
     rating: 4.1,
     category: "screen",
@@ -68,7 +68,7 @@ const productsData = [
   },
   {
     id: 7,
-    name: "Prescription Sunglasses",
+    name: "Prescription",
     price: 12799,
     rating: 4.6,
     category: "power",
@@ -76,7 +76,7 @@ const productsData = [
   },
   {
     id: 8,
-    name: "Bifocal Power Sunglasses",
+    name: "Bifocal Power",
     price: 15199,
     rating: 4.4,
     category: "power",
@@ -96,9 +96,9 @@ const categories = [
 // Price ranges for filtering
 const priceRanges = [
   { id: "all", name: "All Prices" },
-  { id: "under100", name: "Under ₹8000" },
-  { id: "100to150", name: "₹8000 - ₹12000" },
-  { id: "over150", name: "Over ₹12000" }
+  { id: "under8000", name: "Under ₹8000" },
+  { id: "8000to12000", name: "₹8000 - ₹12000" },
+  { id: "over12000", name: "Over ₹12000" }
 ];
 
 const Shop = () => {
@@ -113,12 +113,12 @@ const Shop = () => {
     
     // Price filter
     let priceMatch = true;
-    if (selectedPriceRange === "under100") {
-      priceMatch = product.price < 100;
-    } else if (selectedPriceRange === "100to150") {
-      priceMatch = product.price >= 100 && product.price <= 150;
-    } else if (selectedPriceRange === "over150") {
-      priceMatch = product.price > 150;
+    if (selectedPriceRange === "under8000") {
+      priceMatch = product.price < 8000;
+    } else if (selectedPriceRange === "8000to12000") {
+      priceMatch = product.price >= 8000 && product.price <= 12000;
+    } else if (selectedPriceRange === "over12000") {
+      priceMatch = product.price > 12000;
     }
     
     return categoryMatch && priceMatch;
@@ -165,8 +165,8 @@ const Shop = () => {
   };
 
   return (
-    <div className="shop-container">
-      <h2 className="shop-title">Shop Our Collection</h2>
+    <div className="shop-container container">
+      {/* <h2 className="shop-title">Shop Our Collection</h2> */}
       
       <div className="shop-content">
         {/* Filter Sidebar */}
@@ -254,10 +254,10 @@ const Shop = () => {
                   </div>
                   <div className="product-footer">
                     <span className="product-price">₹{product.price.toFixed(2)}</span>
-                      <Link to="/cart" className="nav-link">
-                    <button className="add-to-cart-btn">
-                      Add to Cart
-                    </button>
+                      <Link to="/book" className="nav-link">
+                        <button className="add-to-cart-btn">
+                          Book Slot
+                        </button>
                       </Link>
                   </div>
                 </div>

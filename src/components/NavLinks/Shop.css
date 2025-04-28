@@ -2,7 +2,6 @@
 
 /* Main Container Styles */
 .shop-container {
-    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem 1rem;
     font-family: 'Poppins', sans-serif;
@@ -123,7 +122,7 @@
 /* Products Grid Styles */
 .products-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 1.5rem;
 }
 
@@ -142,7 +141,7 @@
 
 .product-image-container {
     position: relative;
-    height: 220px;
+    height: 170px;
     overflow: hidden;
 }
 
@@ -154,7 +153,7 @@
 }
 
 .product-card:hover .product-image {
-    transform: scale(1.05);
+    transform: scale(1);
 }
 
 .product-info {
@@ -230,7 +229,7 @@
 }
 
 .add-to-cart-btn:hover {
-    background-color: #2563eb;
+    background-color: #6c7ae0;
 }
 
 .add-to-cart-btn:active {
