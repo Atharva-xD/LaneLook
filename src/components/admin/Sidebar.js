@@ -10,47 +10,50 @@ import "./Sidebar.css"
 
 function SidebarAdmin() {
   return (
+    <div>
       <Sidebar className="sidebar">
         <Menu
+         className="sidebardiv"
           menuItemStyles={{
-            button: {
-              [`&.active`]: {
-                backgroundColor: "#222222", // Active background color
-                color: "#fff", // Active text color
-              },
+            // button: {
+            //   [`&.active`]: {
+            //     backgroundColor: "#222222", // Active background color
+            //     color: "#fff", // Active text color
+            //   },
 
-              // Default styles for MenuItem buttons
-              color: "#fff", // Default text color
-              backgroundColor: "#222", // Default background color
+            //   // Default styles for MenuItem buttons
+            //   color: "#fff", // Default text color
+            //   backgroundColor: "#222", // Default background color
 
-              "&:hover": {
-                backgroundColor: "#fff", // Background color on hover
-                color: "#222", // Text color on hover
-              },
-            },
+            //   "&:hover": {
+            //     backgroundColor: "#fff", // Background color on hover
+            //     color: "#222", // Text color on hover
+            //   },
+            // },
           }}
         >
-          <MenuItem component={<Link to="/admin/" />}>
+          <MenuItem className="menuitem" component={<Link to="/admin/" />}>
             <TbLayoutDashboard className="sidebar-icon"/>
           </MenuItem>
 
-          <MenuItem component={<Link to="/admin/productstable" />}>
+          <MenuItem className="menuitem" component={<Link to="/admin/productstable" />}>
             <FaBoxOpen className="sidebar-icon"/>
           </MenuItem>
 
-          <MenuItem component={<Link to="/admin/userstable" />}>
+          <MenuItem className="menuitem" component={<Link to="/admin/userstable" />}>
             <LuUsersRound className="sidebar-icon"/>
           </MenuItem>
 
-          <MenuItem component={<Link to="/admin/analytics" />}>
+          <MenuItem className="menuitem" component={<Link to="/admin/analytics" />}>
             <IoAnalyticsOutline className="sidebar-icon"/>
           </MenuItem>
 
-          <MenuItem component={<Link to="/admin/setting" />}>
+          <MenuItem className="menuitem" component={<Link to="/admin/setting" />}>
             <MdOutlineSettings className="sidebar-icon"/>
           </MenuItem>
         </Menu>
-      </Sidebar>
+      </Sidebar>    
+    </div>
   );
 }
 
