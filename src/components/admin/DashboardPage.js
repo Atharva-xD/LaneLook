@@ -9,7 +9,6 @@ import './Admin.css';
 const AdminDashboard = () => {
   return (
     <div className="admin-dashboard">
-      <SidebarAdmin />
       <div className="main-content container">
         <div className="dashboard-overview">
           <StatsCard title="Total Users" value="1,203" icon="user" />
