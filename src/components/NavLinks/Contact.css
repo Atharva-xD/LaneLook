@@ -1,7 +1,10 @@
 .contact-container {
-  padding: 40px;
-  background-color: #f4f4f4;
-  font-family: 'Poppins';
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  font-family: 'poppins';
 }
 
 .contact-header h1 {
