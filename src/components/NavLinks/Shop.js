@@ -4,6 +4,7 @@ import { Star } from 'lucide-react';
 import { Link } from "react-router-dom";
 // Import the new CSS file
 import './Shop.css';
+import ProductDetails from './ProductDetails';
 
 // Import your image files
 import glasses1 from "./images/glasses1.jpg";
@@ -105,6 +106,7 @@ const Shop = () => {
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [selectedPriceRange, setSelectedPriceRange] = useState("all");
   const [sortBy, setSortBy] = useState("default");
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   // Filter products based on selected category and price range
   const filteredProducts = productsData.filter(product => {
@@ -231,6 +233,7 @@ const Shop = () => {
                 key={product.id}
                 whileHover={{ scale: 1.03 }}
                 className="product-card"
+                onClick={() => setSelectedProduct(product)}
               >
                 <div className="product-image-container">
                   {product.badge && (
@@ -279,6 +282,14 @@ const Shop = () => {
                 Reset Filters
               </button>
             </div>
+          )}
+
+          {/* Product Details Modal */}
+          {selectedProduct && (
+            <ProductDetails 
+              product={selectedProduct}
+              onClose={() => setSelectedProduct(null)}
+            />
           )}
         </div>
       </div>

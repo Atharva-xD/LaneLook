@@ -282,6 +282,10 @@
     background-color: #10b981;
 }
 
+.products-container:hover{
+    cursor: pointer;
+}
+
 /* Responsive styles */
 @media (min-width: 768px) {
     .shop-content {
