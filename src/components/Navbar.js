@@ -7,6 +7,7 @@ import glasses1 from "../images/glasses1.jpg";
 import glasses2 from "../images/glasses2.jpg";
 import { FaSearch, FaShoppingCart, FaHeart, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
+import Signin from "./SignIn.js";
 
 class Navbar extends React.Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class Navbar extends React.Component {
             <span>Free shipping for standard orders over ₹5000</span>
             <div>
               <a href="#">Help & FAQs</a>
-              <a onClick={this.handleSignInClick}>
+              <a className="signIn-topbar" onClick={this.handleSignInClick}>
                 Sign In
               </a>
               <a href="#">EN</a>
@@ -204,27 +205,7 @@ class Navbar extends React.Component {
         </nav>
         {this.state.signInOpen && (
           <div className="signin-overlay">
-            <div className="signin-header">
-              <h1>Sign In</h1>
-              <FaTimes
-                className="cancel-icon"
-                onClick={this.handleSignInClick}
-              />
-            </div>
-            <div className="signin-content">
-              <form>
-                <label>Username:</label>
-                <input type="text" />
-                <br />
-                <label>Password:</label>
-                <input type="password" />
-                <br />
-                <button type="submit">Sign In</button>
-                <p className="forgot-password">
-                  <a href="#">Forgot password?</a>
-                </p>
-              </form>
-            </div>
+            <Signin close={this.handleSignInClick}/>
           </div>
         )}
 
