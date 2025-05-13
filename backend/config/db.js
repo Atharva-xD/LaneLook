@@ -1,23 +1,22 @@
-// backend/config/db.js
-const mongoose = require('mongoose');
-const dotenv = require('dotenv');
+   // backend/config/db.js
+   const mongoose = require('mongoose');
+   const { config } = require('./env');
 
-dotenv.config();
+   const connectDB = async () => {
+     try {
+       // Set the strictQuery option
+       mongoose.set('strictQuery', true); // or false, depending on your preference
 
-const connectDB = async () => {
-  try {
-    await mongoose.connect(process.env.DB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    });
+       await mongoose.connect(config.DB_URI, {
+         useNewUrlParser: true,
+         useUnifiedTopology: true,
+       });
+       console.log('MongoDB Connected...');
+     } catch (error) {
+       console.error('MongoDB connection error:', error);
+       process.exit(1); // Exit the process with failure
+     }
+   };
 
-    console.log('MongoDB Connected...');
-  } catch (err) {
-    console.error('Connection error:', err);
-    process.exit(1);
-  }
-};
-
-module.exports = { connectDB };
+   module.exports = { connectDB };
+   
