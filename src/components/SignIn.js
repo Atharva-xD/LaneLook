@@ -1,18 +1,15 @@
-// Signin.js
-import React, { useState, useEffect } from 'react';
-import './Signin.css'; // Import custom styles for the Signin component
+import React, { useState } from 'react';
+import './Signin.css';
 import { Form, Button, Container } from 'react-bootstrap';
 import { FaTimes } from "react-icons/fa";
 
-const Signin = ({ close }) => {
+const Signin = ({ close, onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({}); // State to track form validation errors
+  const [errors, setErrors] = useState({});
 
-  // Handle input change
   const handleChange = (e) => {
     const { name, value } = e.target;
-
     if (name === 'email') {
       setEmail(value);
     } else if (name === 'password') {
@@ -20,16 +17,6 @@ const Signin = ({ close }) => {
     }
   };
 
-  // Log values when they change
-  useEffect(() => {
-    console.log("Email:", email);
-  }, [email]);
-
-  useEffect(() => {
-    console.log("Password:", password);
-  }, [password]);
-
-  // Form validation
   const validateForm = () => {
     let errors = {};
     if (!email) {
@@ -47,27 +34,24 @@ const Signin = ({ close }) => {
     return errors;
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
-    // Make sure this line executes by adding a console log
-    console.log("Form submission intercepted");
-    e.preventDefault(); // This stops the page from refreshing
-
+    e.preventDefault();
     const validationErrors = validateForm();
 
     if (Object.keys(validationErrors).length > 0) {
-      setErrors(validationErrors); // Set errors if validation fails
+      setErrors(validationErrors);
     } else {
-      // Handle form submission logic here
-      console.log("Form submitted with:", { email, password });
-      alert('Login successful!'); // Placeholder alert
+      const isAdmin = email === 'admin@gmail.com' && password === 'lanelook';
+      const userData = { email, isAdmin };
+      
+      if (typeof onLogin === 'function') {
+        onLogin(userData);
+      }
 
-      // Reset form fields
       setEmail('');
       setPassword('');
       setErrors({});
 
-      // Close the modal by calling the close function passed as prop
       if (typeof close === 'function') {
         close();
       }
@@ -79,12 +63,11 @@ const Signin = ({ close }) => {
       <div className="signin-form">
         <div className="signin-header">
           <h2>Sign In</h2>
-          {typeof close === 'function' && (
-            <FaTimes
-              className="cancel-icon"
-              onClick={close}
-            />
-          )}
+          <FaTimes
+            className="cancel-icon"
+            onClick={close}
+            style={{ cursor: 'pointer', fontSize: '1.5rem' }}
+          />
         </div>
 
         <Form onSubmit={handleSubmit}>

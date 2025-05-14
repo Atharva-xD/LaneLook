@@ -1,4 +1,4 @@
-/* Signin.css - Updated with #333 and #fff theme */
+/* Signin.css - Updated with fixed cancel icon styling */
 .signIn-topbar:hover {
   cursor: pointer;
 }
@@ -18,6 +18,7 @@
   padding: 30px;
   border-radius: 8px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  position: relative; /* Added to establish a positioning context */
 }
 
 .signin-form h2 {
@@ -114,32 +115,28 @@
   background-color: transparent;
   padding: 30px;
   border-radius: 10px;
-  /* box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); */
   z-index: 3000;
 }
 
 .signin-header {
   display: flex;
-  flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 30px; */
   border-bottom: 1px solid #ddd;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
 }
 
-.signin-header h1 {
-  font-family: 'Poppins', sans-serif;
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: #333;
+.signin-header h2 {
   margin: 0;
-  text-align: center;
+  text-align: left;
 }
 
 .signin-header .cancel-icon {
+  color: #333;
   font-size: 1.5rem;
   cursor: pointer;
-  color: #333;
+  transition: color 0.3s;
 }
 
 .signin-header .cancel-icon:hover {

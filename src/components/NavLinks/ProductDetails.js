@@ -2,6 +2,7 @@ import React from 'react';
 import { Star } from 'lucide-react';
 import { Link } from "react-router-dom";
 import './ProductDetails.css';
+import { FaTimes } from "react-icons/fa";
 
 const ProductDetails = ({ product, onClose }) => {
   const renderRatingStars = (rating) => {
@@ -24,30 +25,36 @@ const ProductDetails = ({ product, onClose }) => {
   return (
     <div className="product-details-modal">
       <div className="product-details-content">
-        <button className="close-btn" onClick={onClose}>
-          ×
-        </button>
-        <div className="product-details-image">
-          <img src={product.image} alt={product.name} />
-        </div>
-        <div className="product-details-info">
+        <div className="product-details-header">
           <h2 className="product-name">{product.name}</h2>
-          <div className="product-rating">
-            <div className="stars-container">
-              {renderRatingStars(product.rating)}
-            </div>
-            <span className="rating-text">({product.rating})</span>
+          <FaTimes
+            className="cancel-icon"
+            onClick={onClose}
+            style={{ cursor: 'pointer', fontSize: '1.5rem', color: '#333' }}
+          />
+        </div>
+        <div className="product-details-body">
+          <div className="product-details-image">
+            <img src={product.image} alt={product.name} />
           </div>
-          <p className="product-price">₹{product.price.toFixed(2)}</p>
-          <p className="product-category">Category: {product.category}</p>
-          <p className="product-description">
-            {product.description || "This is a fantastic product with great features. Perfect for your needs!"}
-          </p>
-          <Link to="/book" className="nav-link">
-            <button className="book-slot-btn">
-              Book Slot
-            </button>
-          </Link>
+          <div className="product-details-info">
+            <div className="product-rating">
+              <div className="stars-container">
+                {renderRatingStars(product.rating)}
+              </div>
+              <span className="rating-text">({product.rating})</span>
+            </div>
+            <p className="product-price">₹{product.price.toFixed(2)}</p>
+            <p className="product-category">Category: {product.category}</p>
+            <p className="product-description">
+              {product.description || "This is a fantastic product with great features. Perfect for your needs!"}
+            </p>
+            <Link to="/book" className="nav-link">
+              <button className="book-slot-btn">
+                Book Slot
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

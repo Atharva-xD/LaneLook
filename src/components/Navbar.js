@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import CartOverlay from "./CartOverlay.js";
 import WishlistOverlay from "./WishlistOverlay.js";
 import SearchOverlay from "./SearchOverlay.js";
@@ -8,18 +8,37 @@ import { motion } from "framer-motion";
 import Signin from "./SignIn.js";
 
 const Navbar = () => {
-  // Replace class component state with useState hooks
   const [searchOpen, setSearchOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
   const [cartVisible, setCartVisible] = useState(false);
   const [wishList, setWishList] = useState(false);
   const [signInOpen, setSignInOpen] = useState(false);
+  const [user, setUser] = useState(null);
+
+  const location = useLocation();
   const [activeTab, setActiveTab] = useState("home");
   
-  // For navigation after hooks conversion
+  useEffect(() => {
+    const path = location.pathname;
+    let tab = "home";
+    if (path === "/") {
+      tab = "home";
+    } else if (path === "/shop") {
+      tab = "shop";
+    } else if (path === "/book") {
+      tab = "book";
+    } else if (path === "/about") {
+      tab = "about";
+    } else if (path === "/contact") {
+      tab = "contact";
+    } else if (path === "/admin") {
+      tab = "admin";
+    }
+    setActiveTab(tab);
+  }, [location]);
+
   const navigate = useNavigate();
 
-  // Event handlers converted to functional component style
   const handleWishlistClick = () => {
     setWishList(!wishList);
     document.body.classList.toggle("wishlist-open");
@@ -74,6 +93,12 @@ const Navbar = () => {
     document.body.classList.remove("signin-open");
   };
 
+  const handleLogin = (userData) => {
+    setUser(userData);
+    setSignInOpen(false);
+    document.body.classList.remove("signin-open");
+  };
+
   return (
     <>
       {/* Top Navbar */}
@@ -82,9 +107,13 @@ const Navbar = () => {
           <span>Free shipping for standard orders over ₹5000</span>
           <div>
             <a href="#">Help & FAQs</a>
-            <a className="signIn-topbar" onClick={handleSignInClick}>
-              Sign In
-            </a>
+            {user ? (
+              <a>{user.email}</a>
+            ) : (
+              <a className="signIn-topbar" onClick={handleSignInClick}>
+                Sign In
+              </a>
+            )}
             <a href="#">EN</a>
             <a href="#">India</a>
           </div>
@@ -138,7 +167,7 @@ const Navbar = () => {
               <li className="nav-item">
                 <Link
                   to="/book"
-                  className={`nav-link ${activeTab === "blog" ? "active" : ""}`}
+                  className={`nav-link ${activeTab === "book" ? "active" : ""}`}
                   onClick={() => handleTabClick("blog")}
                 >
                   Book Slot
@@ -162,15 +191,17 @@ const Navbar = () => {
                   Contact
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  to="/admin"
-                  className={`nav-link ${activeTab === "admin" ? "active" : ""}`}
-                  onClick={() => handleTabClick("admin")}
-                >
-                  Admin
-                </Link>
-              </li>
+              {user?.isAdmin && (
+                <li className="nav-item">
+                  <Link
+                    to="/admin"
+                    className={`nav-link ${activeTab === "admin" ? "active" : ""}`}
+                    onClick={() => handleTabClick("admin")}
+                  >
+                    Admin
+                  </Link>
+                </li>
+              )}
             </ul>
             <div className="navbar-icons">
               <motion.div className="icon" whileHover={{ scale: 1.1 }}>
@@ -194,25 +225,23 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-      
+
       {/* Sign In Overlay */}
       {signInOpen && (
         <div className="signin-overlay">
-          <Signin close={handleCancelSignIn}/>
+          <Signin close={handleCancelSignIn} onLogin={handleLogin} />
         </div>
       )}
 
-      {/* Search Overlay */}
+      {/* Other overlays remain the same */}
       {searchOpen && (  
         <SearchOverlay close={handleCancelClick}/>
       )}
 
-      {/* Cart Overlay */}
       {cartOpen && (
         <CartOverlay close={handleCancelCart}/>
       )}
 
-      {/* Wishlist Overlay */}
       {wishList && (
         <WishlistOverlay close={handleWishlistCancel}/>
       )}
