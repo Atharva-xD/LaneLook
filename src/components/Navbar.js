@@ -1,368 +1,223 @@
 import React, { useState } from "react";
-import { BrowserRouter, Route, Link, Routes, Navigate } from "react-router-dom";
-import Home from "../components/NavLinks/Home.js";
-import Header from "./Header.js";
-import ShoppingCart from "./ShoppingCart.js";
-import glasses1 from "../images/glasses1.jpg";
-import glasses2 from "../images/glasses2.jpg";
+import { Link, useNavigate } from "react-router-dom";
+import CartOverlay from "./CartOverlay.js";
+import WishlistOverlay from "./WishlistOverlay.js";
+import SearchOverlay from "./SearchOverlay.js";
 import { FaSearch, FaShoppingCart, FaHeart, FaTimes } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Signin from "./SignIn.js";
 
-class Navbar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      searchOpen: false,
-      cartOpen: false,
-      cartVisible: false,
-      signInOpen: false,
-      activeTab: "home", // add a new state property to keep track of the active tab
-    };
-  }
+const Navbar = () => {
+  // Replace class component state with useState hooks
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [cartVisible, setCartVisible] = useState(false);
+  const [wishList, setWishList] = useState(false);
+  const [signInOpen, setSignInOpen] = useState(false);
+  const [activeTab, setActiveTab] = useState("home");
+  
+  // For navigation after hooks conversion
+  const navigate = useNavigate();
 
-  handleWishlistClick = () => {
-    this.setState({ wishList: !this.state.wishList });
+  // Event handlers converted to functional component style
+  const handleWishlistClick = () => {
+    setWishList(!wishList);
     document.body.classList.toggle("wishlist-open");
   };
 
-  handleWishlistCancel = () => {
-    this.setState({ wishList: false });
+  const handleWishlistCancel = () => {
+    setWishList(false);
     document.body.classList.remove("wishlist-open");
   };
 
-  toggleCartVisibility = () => {
-    this.setState({ cartVisible: !this.state.cartVisible });
+  const toggleCartVisibility = () => {
+    setCartVisible(!cartVisible);
   };
 
-  handleSearchClick = () => {
-    this.setState({ searchOpen: !this.state.searchOpen });
+  const handleSearchClick = () => {
+    setSearchOpen(!searchOpen);
   };
 
-  handleCancelClick = () => {
-    this.setState({ searchOpen: false });
+  const handleCancelClick = () => {
+    setSearchOpen(false);
   };
 
-  handleCartClick = () => {
-    this.setState({ cartOpen: !this.state.cartOpen });
+  const handleCartClick = () => {
+    setCartOpen(!cartOpen);
     document.body.classList.toggle("cart-open");
   };
 
-  handleCancelCart = () => {
-    this.setState({ cartOpen: false });
+  const handleCancelCart = () => {
+    setCartOpen(false);
     document.body.classList.remove("cart-open");
   };
 
-  handleTabClick = (tab) => {
-    this.setState({ activeTab: tab });
+  const handleTabClick = (tab) => {
+    setActiveTab(tab);
   };
 
-  handleViewCartClick = () => {
-    return <Navigate to="/cart" />;
+  const handleViewCartClick = () => {
+    navigate("/cart");
   };
 
-  handleBrandClick = () => {
-    this.handleTabClick("home");
+  const handleBrandClick = () => {
+    handleTabClick("home");
   };
 
-  handleSignInClick = () => {
-    this.setState({ signInOpen: !this.state.signInOpen });
+  const handleSignInClick = () => {
+    setSignInOpen(!signInOpen);
     document.body.classList.toggle("signin-open");
   };
 
-  render() {
-    return (
-      <>
-        {/* Top Navbar */}
-        <div className="top-navbar">
-          <div className="container d-flex justify-content-between">
-            <span>Free shipping for standard orders over ₹5000</span>
-            <div>
-              <a href="#">Help & FAQs</a>
-              <a className="signIn-topbar" onClick={this.handleSignInClick}>
-                Sign In
-              </a>
-              <a href="#">EN</a>
-              <a href="#">India</a>
+  const handleCancelSignIn = () => {
+    setSignInOpen(false);
+    document.body.classList.remove("signin-open");
+  };
+
+  return (
+    <>
+      {/* Top Navbar */}
+      <div className="top-navbar">
+        <div className="container d-flex justify-content-between">
+          <span>Free shipping for standard orders over ₹5000</span>
+          <div>
+            <a href="#">Help & FAQs</a>
+            <a className="signIn-topbar" onClick={handleSignInClick}>
+              Sign In
+            </a>
+            <a href="#">EN</a>
+            <a href="#">India</a>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Navbar */}
+      <nav className="navbar navbar-expand-lg navbar-light main-navbar">
+        <div className="container">
+          <Link
+            to="/"
+            className="navbar-brand"
+            onClick={handleBrandClick}
+          >
+            Lane Look
+          </Link>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
+          <div
+            className="collapse navbar-collapse"
+            id="navbarSupportedContent"
+          >
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link
+                  to="/"
+                  className={`nav-link ${activeTab === "home" ? "active" : ""}`}
+                  onClick={() => handleTabClick("home")}
+                >
+                  Home
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/shop"
+                  className={`nav-link ${activeTab === "shop" ? "active" : ""}`}
+                  onClick={() => handleTabClick("shop")}
+                >
+                  Shop
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/book"
+                  className={`nav-link ${activeTab === "blog" ? "active" : ""}`}
+                  onClick={() => handleTabClick("blog")}
+                >
+                  Book Slot
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/about"
+                  className={`nav-link ${activeTab === "about" ? "active" : ""}`}
+                  onClick={() => handleTabClick("about")}
+                >
+                  About
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/contact"
+                  className={`nav-link ${activeTab === "contact" ? "active" : ""}`}
+                  onClick={() => handleTabClick("contact")}
+                >
+                  Contact
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  to="/admin"
+                  className={`nav-link ${activeTab === "admin" ? "active" : ""}`}
+                  onClick={() => handleTabClick("admin")}
+                >
+                  Admin
+                </Link>
+              </li>
+            </ul>
+            <div className="navbar-icons">
+              <motion.div className="icon" whileHover={{ scale: 1.1 }}>
+                <FaSearch onClick={handleSearchClick} />
+              </motion.div>
+              <motion.div
+                className="icon cart-icon"
+                whileHover={{ scale: 1.1 }}
+                onClick={handleCartClick}
+              >
+                <FaShoppingCart />
+              </motion.div>
+              <motion.div
+                className="icon heart-icon"
+                whileHover={{ scale: 1.1 }}
+                onClick={handleWishlistClick}
+              >
+                <FaHeart />
+              </motion.div>
             </div>
           </div>
         </div>
+      </nav>
+      
+      {/* Sign In Overlay */}
+      {signInOpen && (
+        <div className="signin-overlay">
+          <Signin close={handleCancelSignIn}/>
+        </div>
+      )}
 
-        {/* Main Navbar */}
-        <nav className="navbar navbar-expand-lg navbar-light main-navbar">
-          <div className="container">
-            <Link
-              to="/"
-              className="navbar-brand"
-              onClick={this.handleBrandClick}
-            >
-              Lane Look
-            </Link>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarSupportedContent"
-              aria-controls="navbarSupportedContent"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span className="navbar-toggler-icon" />
-            </button>
-            <div
-              className="collapse navbar-collapse"
-              id="navbarSupportedContent"
-            >
-              <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                <li className="nav-item">
-                  <Link
-                    to="/"
-                    className={`nav-link ${
-                      this.state.activeTab === "home" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("home")}
-                  >
-                    Home
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/shop"
-                    className={`nav-link ${
-                      this.state.activeTab === "shop" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("shop")}
-                  >
-                    Shop
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/book"
-                    className={`nav-link ${
-                      this.state.activeTab === "blog" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("blog")}
-                  >
-                    Book Slot
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/about"
-                    className={`nav-link ${
-                      this.state.activeTab === "about" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("about")}
-                  >
-                    About
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/contact"
-                    className={`nav-link ${
-                      this.state.activeTab === "contact" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("contact")}
-                  >
-                    Contact
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <Link
-                    to="/admin"
-                    className={`nav-link ${
-                      this.state.activeTab === "features" ? "active" : ""
-                    }`}
-                    onClick={() => this.handleTabClick("admin")}
-                  >
-                    Admin
-                  </Link>
-                </li>
-              </ul>
-              <div className="navbar-icons">
-                <motion.div className="icon" whileHover={{ scale: 1.1 }}>
-                  <FaSearch onClick={this.handleSearchClick} />
-                </motion.div>
-                <motion.div
-                  className="icon cart-icon"
-                  whileHover={{ scale: 1.1 }}
-                  onClick={this.handleCartClick}
-                >
-                  <FaShoppingCart />
-                </motion.div>
-                <motion.div
-                  className="icon heart-icon"
-                  whileHover={{ scale: 1.1 }}
-                  onClick={this.handleWishlistClick}
-                >
-                  <FaHeart />
-                </motion.div>
-              </div>
-            </div>
-          </div>
-        </nav>
-        {this.state.signInOpen && (
-          <div className="signin-overlay">
-            <Signin close={this.handleSignInClick}/>
-          </div>
-        )}
+      {/* Search Overlay */}
+      {searchOpen && (  
+        <SearchOverlay close={handleCancelClick}/>
+      )}
 
-        {this.state.searchOpen && (
-          <motion.div
-            className="search-overlay"
-            initial={{ y: -300 }}
-            whileInView={{ y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <div className="search-bar">
-              <FaTimes
-                className="cancel-icon"
-                onClick={this.handleCancelClick}
-              />
-              <input type="search" placeholder="Search..." />
-              <button>Search</button>
-            </div>
-          </motion.div>
-        )}
+      {/* Cart Overlay */}
+      {cartOpen && (
+        <CartOverlay close={handleCancelCart}/>
+      )}
 
-        {this.state.cartOpen && (
-          <motion.div
-            initial={{ x: 300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="cart-overlay"
-          >
-            <div className="container">
-              <div className="cart-header">
-                <h1>My Cart</h1>
-                <FaTimes
-                  className="cancel-icon"
-                  onClick={this.handleCancelCart}
-                />
-              </div>
-              <div className="cart-item-container">
-                <div className="row">
-                  <div className="cart-items">
-                    <div className="img col-3 col-md-4">
-                      <img
-                        src={glasses1}
-                        alt="glasses1"
-                        className="img-fluid"
-                      />
-                    </div>
-                    <div className="item-details">
-                      <p className="p-title">Eyeglasses</p>
-                      <p className="p-price">1 x ₹850</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="cart-items">
-                    <div className="img col-3 col-md-4">
-                      <img
-                        src={glasses2}
-                        alt="glasses2"
-                        className="img-fluid"
-                      />
-                    </div>
-                    <div className="item-details">
-                      <p className="p-title">Eyeglasses</p>
-                      <p className="p-price">1 x ₹850</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="cart-footer">
-                <div className="btns">
-                  <button className="btn btn-primary">Checkout</button>
-                  <button className="btn btn-secondary">
-                    <Link
-                      to="/cart"
-                      className="text-decoration-none text-white"
-                      onClick={() => {
-                        this.handleCancelCart();
-                      }}
-                    >
-                      View Cart
-                    </Link>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-
-        {this.state.wishList && (
-          <motion.div
-            initial={{ x: 300, opacity: 0 }}
-            animate={{ x: 0, opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="wishlist-overlay"
-          >
-            <div className="container">
-              <div className="wishlist-header">
-                <h1>My Wishlist</h1>
-                <FaTimes
-                  className="cancel-icon"
-                  onClick={this.handleWishlistCancel}
-                />
-              </div>
-              <div className="wishlist-item-container">
-                <div className="row">
-                  <div className="wishlist-items">
-                    <div className="img col-3 col-md-4">
-                      <img
-                        src={glasses1}
-                        alt="glasses1"
-                        className="img-fluid"
-                      />
-                    </div>
-                    <div className="item-details">
-                      <p className="p-title">Eyeglasses</p>
-                      <p className="p-price">1 x ₹850</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="wishlist-items">
-                    <div className="img col-3 col-md-4">
-                      <img
-                        src={glasses2}
-                        alt="glasses2"
-                        className="img-fluid"
-                      />
-                    </div>
-                    <div className="item-details">
-                      <p className="p-title">Eyeglasses</p>
-                      <p className="p-price">1 x ₹850</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="wishlist-footer">
-                <div className="btns">
-                  <button className="btn btn-primary">Checkout</button>
-                  <button className="btn btn-secondary">
-                    <Link
-                      to="/wishlist"
-                      className="text-decoration-none text-white"
-                      onClick={() => {
-                        this.handleWishlistCancel();
-                      }}
-                    >
-                      View Wishlist
-                    </Link>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </>
-    );
-  }
-}
+      {/* Wishlist Overlay */}
+      {wishList && (
+        <WishlistOverlay close={handleWishlistCancel}/>
+      )}
+    </>
+  );
+};
 
 export default Navbar;
