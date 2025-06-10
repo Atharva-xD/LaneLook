@@ -1,16 +1,18 @@
 // Book.js
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Book.css'; // Import custom styles for the Book component
+import emailjs from '@emailjs/browser';
 
 const Book = () => {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    date: '',
+    from_name: '',
+    from_email: '',
+    message: '',
     timeSlot: ''
   });
 
   const [errors, setErrors] = useState({}); // State to track form validation errors
+  const form = useRef(); // Ref for the form to be used with EmailJS
 
   // Handle input change
   const handleChange = (e) => {
@@ -20,14 +22,14 @@ const Book = () => {
   // Form validation
   const validateForm = () => {
     let errors = {};
-    if (!formData.name) {
-      errors.name = 'Name is required';
+    if (!formData.from_name) {
+      errors.from_name = 'Name is required';
     }
-    if (!formData.email || !formData.email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
+    if (!formData.from_email || !formData.from_email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
       errors.email = 'Invalid email address';
     }
-    if (!formData.date) {
-      errors.date = 'Date is required';
+    if (!formData.message) {
+      errors.message = 'Message is required';
     }
     if (!formData.timeSlot) {
       errors.timeSlot = 'Time slot is required';
@@ -43,12 +45,21 @@ const Book = () => {
       setErrors(validationErrors); // Set errors if validation fails
     } else {
       // Handle form submission logic here
-      alert('Slot booked!'); // Placeholder alert
+      // Send email using EmailJS
+      emailjs.sendForm('service_kaszvw1', 'template_89b92u8', form.current, 'veBJ3jhU_ONNTfYFX')
+        .then((result) => {
+          console.log(result.text);
+          alert('Slot booked successfully! Confirmation email sent.'); // Success message
+        }, (error) => {
+          console.log(error.text);
+          alert('Failed to book slot. Please try again.'); // Error message
+        });
+
       // Reset form fields
       setFormData({
-        name: '',
-        email: '',
-        date: '',
+        from_name: '',
+        from_email: '',
+        message: '',
         timeSlot: ''
       });
       setErrors({});
@@ -61,37 +72,37 @@ const Book = () => {
         <h1>Book Your Slot</h1>
       </div>
       <div className="book-form">
-        <form onSubmit={handleSubmit}>
+        <form ref={form} onSubmit={handleSubmit}> {/* Attach the ref to the form */}
           <input
             type="text"
-            name="name"
+            name="from_name"
             placeholder="Your Name"
-            value={formData.name}
+            value={formData.from_name}
             onChange={handleChange}
             required
           />
-          {errors.name && <div className="error">{errors.name}</div>}
-          
+          {errors.from_name && <div className="error">{errors.from_name}</div>}
+
           <input
             type="email"
-            name="email"
+            name="from_email"
             placeholder="Your Email"
-            value={formData.email}
+            value={formData.from_email}
             onChange={handleChange}
             required
           />
           {errors.email && <div className="error">{errors.email}</div>}
-          
+
           <input
-            type="date"
-            name="date"
-            placeholder="Select Date"
-            value={formData.date}
+            type="text"
+            name="message"
+            placeholder="type a message here ..."
+            value={formData.message}
             onChange={handleChange}
             required
           />
-          {errors.date && <div className="error">{errors.date}</div>}
-          
+          {errors.message && <div className="error">{errors.message}</div>}
+
           <select
             name="timeSlot"
             value={formData.timeSlot}
@@ -109,7 +120,7 @@ const Book = () => {
             <option value="16:00-17:00">16:00-17:00</option>
           </select>
           {errors.timeSlot && <div className="error">{errors.timeSlot}</div>}
-          
+
           <button type="submit">Book Slot</button>
         </form>
       </div>
