@@ -117,10 +117,21 @@
 
 /* Media Queries for Responsiveness */
 @media (max-width: 768px) {
-  .contact-info,
   .contact-form {
     flex-basis: 100%; /* Full width on medium screens */
     margin-bottom: 20px; /* Add margin for spacing */
+  }
+
+  .contact-info{
+    flex-basis: 100%; /* Full width on medium screens */
+    margin-bottom: 20px; /* Add margin for spacing */
+    text-align: center;
+  }
+
+  .contact-info h2,
+  .contact-form h2 {
+    font-size: 1.5rem; /* Adjust section titles for smaller screens */
+    text-align: center;
   }
 }
 

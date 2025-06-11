@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './Contact.css'; // Import custom styles for the Contact component
+import emailjs from '@emailjs/browser'; // Import EmailJS
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -9,6 +10,7 @@ const Contact = () => {
   });
 
   const [errors, setErrors] = useState({}); // State to track form validation errors
+  const form = useRef(); // Ref for the form to be used with EmailJS
 
   // Handle input change
   const handleChange = (e) => {
@@ -37,8 +39,16 @@ const Contact = () => {
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors); // Set errors if validation fails
     } else {
-      // Handle form submission logic here
-      alert('Message sent!'); // Placeholder alert
+      // Send email using EmailJS
+      emailjs.sendForm('service_kaszvw1', 'template_vegyi9n', form.current, 'veBJ3jhU_ONNTfYFX')
+        .then((result) => {
+          console.log(result.text);
+          alert('Message sent successfully!'); // Success message
+        }, (error) => {
+          console.log(error.text);
+          alert('Failed to send message. Please try again.'); // Error message
+        });
+
       // Reset form fields
       setFormData({
         name: '',
@@ -78,7 +88,7 @@ const Contact = () => {
 
         <div className="contact-form">
           <h2>Send a Message</h2>
-          <form onSubmit={handleSubmit}>
+          <form ref={form} onSubmit={handleSubmit}> {/* Attach the ref to the form */}
             <input
               type="text"
               name="name"

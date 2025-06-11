@@ -183,7 +183,7 @@ const Navbar = () => {
             className="navbar-brand"
             onClick={handleBrandClick}
           >
-            Lane Look
+            LensLook
           </Link>
           <button
             className="navbar-toggler"

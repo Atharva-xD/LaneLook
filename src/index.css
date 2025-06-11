@@ -562,13 +562,14 @@ font-family: "Times New Roman", Times, serif;
 @media (max-width: 768px) {
   .navbar-collapse {
     background-color: #fff;
+    z-index: 2;
   }
 
   .footer .row {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 30px;
+    gap: 1;
   }
 
   .footer .col-lg-4,
@@ -585,9 +586,16 @@ font-family: "Times New Roman", Times, serif;
   }
 }
 
+@media (max-width: 610px) {
+  .top-navbar{
+    display: none;
+  }
+}
+
 @media (max-width: 480px) {
   .navbar-collapse {
     background-color: #fff;
+    z-index: 2;
   }
 
   .footer h5 {
@@ -598,9 +606,6 @@ font-family: "Times New Roman", Times, serif;
     font-size: 14px;
   }
 
-  .top-navbar{
-    display: none;
-  }
 }
 
 .text-color {

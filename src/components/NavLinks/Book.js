@@ -7,7 +7,7 @@ const Book = () => {
   const [formData, setFormData] = useState({
     from_name: '',
     from_email: '',
-    message: '',
+    address: '',
     timeSlot: ''
   });
 
@@ -28,8 +28,8 @@ const Book = () => {
     if (!formData.from_email || !formData.from_email.match(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/)) {
       errors.email = 'Invalid email address';
     }
-    if (!formData.message) {
-      errors.message = 'Message is required';
+    if (!formData.address) {
+      errors.address = 'address is required';
     }
     if (!formData.timeSlot) {
       errors.timeSlot = 'Time slot is required';
@@ -49,17 +49,17 @@ const Book = () => {
       emailjs.sendForm('service_kaszvw1', 'template_89b92u8', form.current, 'veBJ3jhU_ONNTfYFX')
         .then((result) => {
           console.log(result.text);
-          alert('Slot booked successfully! Confirmation email sent.'); // Success message
+          alert('Slot booked successfully! Confirmation email sent.'); // Success address
         }, (error) => {
           console.log(error.text);
-          alert('Failed to book slot. Please try again.'); // Error message
+          alert('Failed to book slot. Please try again.'); // Error address
         });
 
       // Reset form fields
       setFormData({
         from_name: '',
         from_email: '',
-        message: '',
+        address: '',
         timeSlot: ''
       });
       setErrors({});
@@ -94,13 +94,13 @@ const Book = () => {
           {errors.email && <div className="error">{errors.email}</div>}
 
           <textarea
-            name="message"
-            placeholder="Type Your Message Here ..."
-            value={formData.message}
+            name="address"
+            placeholder="Your Address"
+            value={formData.address}
             onChange={handleChange}
             required
           ></textarea>
-          {errors.message && <div className="error">{errors.message}</div>}
+          {errors.address && <div className="error">{errors.address}</div>}
 
 
           <select
