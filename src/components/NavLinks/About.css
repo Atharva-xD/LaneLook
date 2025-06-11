@@ -4,18 +4,18 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'poppins';
 }
 
 .about-content-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: flex-start; /* Changed to flex-start for better alignment */
+  align-items: center;
 }
 
 .about-content {
-  width: 100%; /* Default to full width on small screens */
+  width: 45%;
   margin-bottom: 30px;
 }
 
@@ -25,12 +25,12 @@
   line-height: 1.5;
 }
 
-.about-section p {
+.about-section p{
   text-align: justify;
   margin: 5px;
 }
 
-.about-section h2 {
+.about-section h2{
   text-align: center;
   margin: 5px;
 }
@@ -43,7 +43,7 @@
 }
 
 .about-team {
-  width: 100%; /* Default to full width on small screens */
+  width: 45%;
   margin-top: 30px;
 }
 
@@ -55,7 +55,7 @@
 
 .team-member {
   margin: 20px;
-  width: calc(33.33% - 20px); /* Default to 3 members per row */
+  width: calc(33.33% - 20px);
   text-align: center;
 }
 
@@ -76,7 +76,6 @@
   color: #666;
 }
 
-/* Media Queries for Responsiveness */
 @media (max-width: 768px) {
   .about-content {
     width: 100%; /* Full width on medium screens */

@@ -112,7 +112,7 @@ const Shop = () => {
   const filteredProducts = productsData.filter(product => {
     // Category filter
     const categoryMatch = selectedCategory === "all" || product.category === selectedCategory;
-    
+
     // Price filter
     let priceMatch = true;
     if (selectedPriceRange === "under8000") {
@@ -122,7 +122,7 @@ const Shop = () => {
     } else if (selectedPriceRange === "over12000") {
       priceMatch = product.price > 12000;
     }
-    
+
     return categoryMatch && priceMatch;
   });
 
@@ -143,7 +143,7 @@ const Shop = () => {
     const stars = [];
     const fullStars = Math.floor(rating);
     const hasHalfStar = rating % 1 >= 0.5;
-    
+
     for (let i = 0; i < 5; i++) {
       if (i < fullStars) {
         stars.push(<Star key={i} className="text-yellow-500 fill-yellow-500" size={16} />);
@@ -169,46 +169,50 @@ const Shop = () => {
   return (
     <div className="shop-container container">
       {/* <h2 className="shop-title">Shop Our Collection</h2> */}
-      
-      <div className="shop-content">
+
+      <div className="shop-content clearfix">
         {/* Filter Sidebar */}
         <div className="filter-sidebar">
           <h3 className="filter-title">Filter Products</h3>
-          
+
           {/* Category Filter */}
           <div className="filter-section">
             <h4 className="filter-section-title">Categories</h4>
             <ul className="filter-list">
               {categories.map(category => (
                 <li key={category.id} className="filter-option">
-                  <button
-                    className={`filter-button ${selectedCategory === category.id ? 'active' : ''}`}
-                    onClick={() => setSelectedCategory(category.id)}
-                  >
-                    {category.name}
-                  </button>
+                  <a href='#shopping-products'>
+                    <button
+                      className={`filter-button ${selectedCategory === category.id ? 'active' : ''}`}
+                      onClick={() => setSelectedCategory(category.id)}
+                    >
+                      {category.name}
+                    </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
-          
+
           {/* Price Range Filter */}
           <div className="filter-section">
             <h4 className="filter-section-title">Price Range</h4>
             <ul className="filter-list">
               {priceRanges.map(range => (
                 <li key={range.id} className="filter-option">
-                  <button
-                    className={`filter-button ${selectedPriceRange === range.id ? 'active' : ''}`}
-                    onClick={() => setSelectedPriceRange(range.id)}
-                  >
-                    {range.name}
-                  </button>
+                  <a href='#shopping-products'>
+                    <button
+                      className={`filter-button ${selectedPriceRange === range.id ? 'active' : ''}`}
+                      onClick={() => setSelectedPriceRange(range.id)}
+                    >
+                      {range.name}
+                    </button>
+                  </a>
                 </li>
               ))}
             </ul>
           </div>
-          
+
           {/* Sort Options */}
           <div className="filter-section">
             <h4 className="filter-section-title">Sort By</h4>
@@ -224,9 +228,9 @@ const Shop = () => {
             </select>
           </div>
         </div>
-        
+
         {/* Products Container */}
-        <div className="products-container">
+        <div className="products-container" id='shopping-products'>
           <div className="products-grid">
             {sortedProducts.map(product => (
               <motion.div
@@ -241,9 +245,9 @@ const Shop = () => {
                       {getBadgeText(product.badge)}
                     </span>
                   )}
-                  <img 
-                    src={product.image} 
-                    alt={product.name} 
+                  <img
+                    src={product.image}
+                    alt={product.name}
                     className="product-image"
                   />
                 </div>
@@ -257,22 +261,22 @@ const Shop = () => {
                   </div>
                   <div className="product-footer">
                     <span className="product-price">₹{product.price.toFixed(2)}</span>
-                      <Link to="/book" className="nav-link">
-                        <button className="add-to-cart-btn">
-                          Book Slot
-                        </button>
-                      </Link>
+                    <Link to="/book" className="nav-link">
+                      <button className="add-to-cart-btn">
+                        Book Slot
+                      </button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
-          
+
           {/* Empty state */}
           {sortedProducts.length === 0 && (
             <div className="empty-state">
               <p className="empty-text">No products match your filter criteria.</p>
-              <button 
+              <button
                 className="reset-filters-btn"
                 onClick={() => {
                   setSelectedCategory("all");
@@ -286,7 +290,7 @@ const Shop = () => {
 
           {/* Product Details Modal */}
           {selectedProduct && (
-            <ProductDetails 
+            <ProductDetails
               product={selectedProduct}
               onClose={() => setSelectedProduct(null)}
             />

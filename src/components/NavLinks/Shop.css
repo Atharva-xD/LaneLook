@@ -286,6 +286,12 @@
     cursor: pointer;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
 /* Responsive styles */
 @media (min-width: 768px) {
     .shop-content {
@@ -310,10 +316,16 @@
 
     .filter-sidebar {
         margin-bottom: 1.5rem;
+        position: relative; /* Ensure it stays in flow */
+        z-index: 1; /* Ensure it stays above the products */
     }
 
     .products-grid {
         grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    }
+
+    .products-container {
+        margin-top: 1rem; /* Add margin to separate from filter */
     }
 }
 
