@@ -1,102 +1,157 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback, useMemo } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import CartOverlay from "./CartOverlay.js";
 import WishlistOverlay from "./WishlistOverlay.js";
 import SearchOverlay from "./SearchOverlay.js";
-import { FaSearch, FaShoppingCart, FaHeart, FaTimes } from "react-icons/fa";
+import { FaSearch, FaShoppingCart, FaHeart } from "react-icons/fa";
 import { motion } from "framer-motion";
 import Signin from "./SignIn.js";
 
+// Constants
+const ROUTE_TAB_MAP = {
+  "/": "home",
+  "/shop": "shop", 
+  "/book": "book",
+  "/about": "about",
+  "/contact": "contact",
+  "/admin": "admin"
+};
+
+const NAV_ITEMS = [
+  { path: "/", label: "Home", tab: "home" },
+  { path: "/shop", label: "Shop", tab: "shop" },
+  { path: "/book", label: "Book Slot", tab: "book" },
+  { path: "/about", label: "About", tab: "about" },
+  { path: "/contact", label: "Contact", tab: "contact" }
+];
+
+const BODY_CLASSES = {
+  WISHLIST: "wishlist-open",
+  CART: "cart-open", 
+  SIGNIN: "signin-open"
+};
+
 const Navbar = () => {
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [cartOpen, setCartOpen] = useState(false);
+  // State management
+  const [overlays, setOverlays] = useState({
+    search: false,
+    cart: false,
+    wishlist: false,
+    signIn: false
+  });
   const [cartVisible, setCartVisible] = useState(false);
-  const [wishList, setWishList] = useState(false);
-  const [signInOpen, setSignInOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [activeTab, setActiveTab] = useState("home");
 
   const location = useLocation();
-  const [activeTab, setActiveTab] = useState("home");
-  
-  useEffect(() => {
-    const path = location.pathname;
-    let tab = "home";
-    if (path === "/") {
-      tab = "home";
-    } else if (path === "/shop") {
-      tab = "shop";
-    } else if (path === "/book") {
-      tab = "book";
-    } else if (path === "/about") {
-      tab = "about";
-    } else if (path === "/contact") {
-      tab = "contact";
-    } else if (path === "/admin") {
-      tab = "admin";
-    }
-    setActiveTab(tab);
-  }, [location]);
-
   const navigate = useNavigate();
 
-  const handleWishlistClick = () => {
-    setWishList(!wishList);
-    document.body.classList.toggle("wishlist-open");
-  };
+  // Memoized values
+  const isAdmin = useMemo(() => user?.isAdmin, [user?.isAdmin]);
 
-  const handleWishlistCancel = () => {
-    setWishList(false);
-    document.body.classList.remove("wishlist-open");
-  };
+  // Update active tab based on current route
+  useEffect(() => {
+    const newTab = ROUTE_TAB_MAP[location.pathname] || "home";
+    setActiveTab(newTab);
+  }, [location.pathname]);
 
-  const toggleCartVisibility = () => {
-    setCartVisible(!cartVisible);
-  };
+  // Helper function to toggle body classes
+  const toggleBodyClass = useCallback((className, shouldAdd) => {
+    document.body.classList.toggle(className, shouldAdd);
+  }, []);
 
-  const handleSearchClick = () => {
-    setSearchOpen(!searchOpen);
-  };
+  // Generic overlay toggle function
+  const toggleOverlay = useCallback((overlayType, bodyClass) => {
+    setOverlays(prev => {
+      const newState = !prev[overlayType];
+      if (bodyClass) {
+        toggleBodyClass(bodyClass, newState);
+      }
+      return { ...prev, [overlayType]: newState };
+    });
+  }, [toggleBodyClass]);
 
-  const handleCancelClick = () => {
-    setSearchOpen(false);
-  };
+  // Close overlay function
+  const closeOverlay = useCallback((overlayType, bodyClass) => {
+    setOverlays(prev => ({ ...prev, [overlayType]: false }));
+    if (bodyClass) {
+      toggleBodyClass(bodyClass, false);
+    }
+  }, [toggleBodyClass]);
 
-  const handleCartClick = () => {
-    setCartOpen(!cartOpen);
-    document.body.classList.toggle("cart-open");
-  };
+  // Event handlers
+  const handleSearchClick = useCallback(() => {
+    toggleOverlay('search');
+  }, [toggleOverlay]);
 
-  const handleCancelCart = () => {
-    setCartOpen(false);
-    document.body.classList.remove("cart-open");
-  };
+  const handleCartClick = useCallback(() => {
+    toggleOverlay('cart', BODY_CLASSES.CART);
+  }, [toggleOverlay]);
 
-  const handleTabClick = (tab) => {
-    setActiveTab(tab);
-  };
+  const handleWishlistClick = useCallback(() => {
+    toggleOverlay('wishlist', BODY_CLASSES.WISHLIST);
+  }, [toggleOverlay]);
 
-  const handleViewCartClick = () => {
-    navigate("/cart");
-  };
+  const handleSignInClick = useCallback(() => {
+    toggleOverlay('signIn', BODY_CLASSES.SIGNIN);
+  }, [toggleOverlay]);
 
-  const handleBrandClick = () => {
-    handleTabClick("home");
-  };
+  const handleCancelClick = useCallback(() => {
+    closeOverlay('search');
+  }, [closeOverlay]);
 
-  const handleSignInClick = () => {
-    setSignInOpen(!signInOpen);
-    document.body.classList.toggle("signin-open");
-  };
+  const handleCancelCart = useCallback(() => {
+    closeOverlay('cart', BODY_CLASSES.CART);
+  }, [closeOverlay]);
 
-  const handleCancelSignIn = () => {
-    setSignInOpen(false);
-    document.body.classList.remove("signin-open");
-  };
+  const handleWishlistCancel = useCallback(() => {
+    closeOverlay('wishlist', BODY_CLASSES.WISHLIST);
+  }, [closeOverlay]);
 
-  const handleLogin = (userData) => {
+  const handleCancelSignIn = useCallback(() => {
+    closeOverlay('signIn', BODY_CLASSES.SIGNIN);
+  }, [closeOverlay]);
+
+  const handleLogin = useCallback((userData) => {
     setUser(userData);
-    setSignInOpen(false);
-    document.body.classList.remove("signin-open");
+    closeOverlay('signIn', BODY_CLASSES.SIGNIN);
+  }, [closeOverlay]);
+
+  const handleTabClick = useCallback((tab) => {
+    setActiveTab(tab);
+    // Close mobile navbar when a link is clicked
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      if (navbarToggler) {
+        navbarToggler.click();
+      }
+    }
+  }, []);
+
+  const handleBrandClick = useCallback(() => {
+    setActiveTab("home");
+    // Close mobile navbar when brand is clicked
+    const navbarCollapse = document.querySelector('.navbar-collapse');
+    if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      if (navbarToggler) {
+        navbarToggler.click();
+      }
+    }
+  }, []);
+
+  const handleViewCartClick = useCallback(() => {
+    navigate("/cart");
+  }, [navigate]);
+
+  const toggleCartVisibility = useCallback(() => {
+    setCartVisible(prev => !prev);
+  }, []);
+
+  // Animation variants
+  const iconVariants = {
+    hover: { scale: 1.1 }
   };
 
   return (
@@ -146,52 +201,18 @@ const Navbar = () => {
             id="navbarSupportedContent"
           >
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <li className="nav-item">
-                <Link
-                  to="/"
-                  className={`nav-link ${activeTab === "home" ? "active" : ""}`}
-                  onClick={() => handleTabClick("home")}
-                >
-                  Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/shop"
-                  className={`nav-link ${activeTab === "shop" ? "active" : ""}`}
-                  onClick={() => handleTabClick("shop")}
-                >
-                  Shop
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/book"
-                  className={`nav-link ${activeTab === "book" ? "active" : ""}`}
-                  onClick={() => handleTabClick("blog")}
-                >
-                  Book Slot
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/about"
-                  className={`nav-link ${activeTab === "about" ? "active" : ""}`}
-                  onClick={() => handleTabClick("about")}
-                >
-                  About
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  to="/contact"
-                  className={`nav-link ${activeTab === "contact" ? "active" : ""}`}
-                  onClick={() => handleTabClick("contact")}
-                >
-                  Contact
-                </Link>
-              </li>
-              {user?.isAdmin && (
+              {NAV_ITEMS.map(({ path, label, tab }) => (
+                <li key={tab} className="nav-item">
+                  <Link
+                    to={path}
+                    className={`nav-link ${activeTab === tab ? "active" : ""}`}
+                    onClick={() => handleTabClick(tab)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              ))}
+              {isAdmin && (
                 <li className="nav-item">
                   <Link
                     to="/admin"
@@ -204,19 +225,26 @@ const Navbar = () => {
               )}
             </ul>
             <div className="navbar-icons">
-              <motion.div className="icon" whileHover={{ scale: 1.1 }}>
-                <FaSearch onClick={handleSearchClick} />
+              <motion.div 
+                className="icon" 
+                variants={iconVariants}
+                whileHover="hover"
+                onClick={handleSearchClick}
+              >
+                <FaSearch />
               </motion.div>
               <motion.div
                 className="icon cart-icon"
-                whileHover={{ scale: 1.1 }}
+                variants={iconVariants}
+                whileHover="hover"
                 onClick={handleCartClick}
               >
                 <FaShoppingCart />
               </motion.div>
               <motion.div
                 className="icon heart-icon"
-                whileHover={{ scale: 1.1 }}
+                variants={iconVariants}
+                whileHover="hover"
                 onClick={handleWishlistClick}
               >
                 <FaHeart />
@@ -226,23 +254,22 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Sign In Overlay */}
-      {signInOpen && (
+      {/* Overlays */}
+      {overlays.signIn && (
         <div className="signin-overlay">
           <Signin close={handleCancelSignIn} onLogin={handleLogin} />
         </div>
       )}
 
-      {/* Other overlays remain the same */}
-      {searchOpen && (  
+      {overlays.search && (  
         <SearchOverlay close={handleCancelClick}/>
       )}
 
-      {cartOpen && (
+      {overlays.cart && (
         <CartOverlay close={handleCancelCart}/>
       )}
 
-      {wishList && (
+      {overlays.wishlist && (
         <WishlistOverlay close={handleWishlistCancel}/>
       )}
     </>
