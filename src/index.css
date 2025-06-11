@@ -525,13 +525,14 @@ font-family: "Times New Roman", Times, serif;
 .footer {
   background-color: #222222;
   color: #fff;
-  padding: 20px;
+  padding: 40px 20px;
   text-align: center;
+  font-family: 'Poppins', sans-serif;
 }
 
 .footer h5 {
   font-size: 18px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
 .footer ul {
@@ -543,15 +544,63 @@ font-family: "Times New Roman", Times, serif;
 .footer li {
   display: inline-block;
   margin-right: 20px;
+  margin-bottom: 10px; /* space between lines on smaller screens */
 }
 
 .footer a {
   color: #fff;
   text-decoration: none;
+  transition: color 0.3s ease;
 }
 
 .footer a:hover {
   color: #ccc;
+}
+
+/* Responsive adjustments */
+
+@media (max-width: 768px) {
+  .navbar-collapse {
+    background-color: #fff;
+  }
+
+  .footer .row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .footer .col-lg-4,
+  .footer .col-md-4,
+  .footer .col-sm-12 {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .footer li {
+    display: block;
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-collapse {
+    background-color: #fff;
+  }
+
+  .footer h5 {
+    font-size: 16px;
+  }
+
+  .footer li {
+    font-size: 14px;
+  }
+
+  .top-navbar{
+    display: none;
+  }
 }
 
 .text-color {

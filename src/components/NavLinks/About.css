@@ -4,18 +4,18 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  font-family: 'poppins';
+  font-family: 'Poppins', sans-serif;
 }
 
 .about-content-wrapper {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-start; /* Changed to flex-start for better alignment */
 }
 
 .about-content {
-  width: 45%;
+  width: 100%; /* Default to full width on small screens */
   margin-bottom: 30px;
 }
 
@@ -25,12 +25,12 @@
   line-height: 1.5;
 }
 
-.about-section p{
+.about-section p {
   text-align: justify;
   margin: 5px;
 }
 
-.about-section h2{
+.about-section h2 {
   text-align: center;
   margin: 5px;
 }
@@ -43,7 +43,7 @@
 }
 
 .about-team {
-  width: 45%;
+  width: 100%; /* Default to full width on small screens */
   margin-top: 30px;
 }
 
@@ -55,7 +55,7 @@
 
 .team-member {
   margin: 20px;
-  width: calc(33.33% - 20px);
+  width: calc(33.33% - 20px); /* Default to 3 members per row */
   text-align: center;
 }
 
@@ -74,4 +74,29 @@
 .team-member p {
   font-size: 16px;
   color: #666;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .about-content {
+    width: 100%; /* Full width on medium screens */
+  }
+
+  .about-team {
+    width: 100%; /* Full width on medium screens */
+  }
+
+  .team-member {
+    width: calc(50% - 20px); /* 2 members per row on medium screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .team-member {
+    width: 100%; /* Full width on small screens */
+  }
+
+  .about-content {
+    margin-bottom: 20px; /* Adjust margin for smaller screens */
+  }
 }

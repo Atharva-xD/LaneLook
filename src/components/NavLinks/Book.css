@@ -37,6 +37,7 @@
 }
 
 .book-form input,
+.book-form textarea,
 .book-form select {
   padding: 10px;
   margin: 15px;

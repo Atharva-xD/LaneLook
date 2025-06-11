@@ -93,15 +93,15 @@ const Book = () => {
           />
           {errors.email && <div className="error">{errors.email}</div>}
 
-          <input
-            type="text"
+          <textarea
             name="message"
-            placeholder="type a message here ..."
+            placeholder="Type Your Message Here ..."
             value={formData.message}
             onChange={handleChange}
             required
-          />
+          ></textarea>
           {errors.message && <div className="error">{errors.message}</div>}
+
 
           <select
             name="timeSlot"

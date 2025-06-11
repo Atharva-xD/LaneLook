@@ -4,11 +4,11 @@
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
-  font-family: 'poppins';
+  font-family: 'Poppins', sans-serif;
 }
 
 .contact-header h1 {
-  font-family: "Syne";
+  font-family: "Syne", sans-serif;
   font-size: 2.5rem;
   margin-bottom: 30px;
   text-align: center;
@@ -25,6 +25,7 @@
 
 .contact-info {
   flex-basis: 45%;
+  min-width: 300px; /* Ensure a minimum width for smaller screens */
 }
 
 .contact-info h2 {
@@ -73,6 +74,7 @@
 
 .contact-form {
   flex-basis: 45%;
+  min-width: 300px; /* Ensure a minimum width for smaller screens */
 }
 
 .contact-form h2 {
@@ -111,4 +113,35 @@
 
 .contact-form button:hover {
   background-color: #555;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .contact-info,
+  .contact-form {
+    flex-basis: 100%; /* Full width on medium screens */
+    margin-bottom: 20px; /* Add margin for spacing */
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-header h1 {
+    font-size: 2rem; /* Adjust header size for smaller screens */
+  }
+
+  .contact-info{
+    text-align: center;
+  }
+
+  .contact-info h2,
+  .contact-form h2 {
+    font-size: 1.5rem; /* Adjust section titles for smaller screens */
+    text-align: center;
+  }
+
+  .contact-info li,
+  .contact-form input,
+  .contact-form textarea {
+    font-size: 0.9rem; /* Adjust font size for smaller screens */
+  }
 }
