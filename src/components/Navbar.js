@@ -224,6 +224,7 @@ const Navbar = () => {
                 </li>
               )}
             </ul>
+          </div>
             <div className="navbar-icons">
               <motion.div 
                 className="icon" 
@@ -250,7 +251,6 @@ const Navbar = () => {
                 <FaHeart />
               </motion.div>
             </div>
-          </div>
         </div>
       </nav>
 
