@@ -1,79 +1,97 @@
 import React from "react";
 import "./About.css";
-import pfp from "./images/pfp.avif";
+import { Link } from "react-router-dom";
+import manImage from "./images/pfp.avif";
+import { CheckCircle } from "lucide-react";
 import { motion } from "framer-motion";
 
-const About = () => {
+// Define animation variants
+const containerVariants = {
+  hidden: { opacity: 0, y: 50 }, // Start off-screen
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: "easeOut",
+      staggerChildren: 0.3, // Stagger children animations
+    },
+  },
+};
+
+const overlayVariants = {
+  hidden: { opacity: 0, scale: 0.8 }, // Start hidden and scaled down
+  visible: { opacity: 1, scale: 1, transition: { duration: 0.5 } }, // Fade in and scale up
+};
+
+export default function EyewearCommitment() {
   return (
-    <div className="about-container container">
-      <h1 className="text-center">About Us</h1>
-      <div className="about-content-wrapper">
-        <motion.section className="about-content">
-          <div className="about-section">
-            <h2>Our Mission</h2>
-            <p>
-              At Lane Look, our mission is to provide high-quality eyewear that
-              blends fashion with function. We believe in empowering individuals
-              with the confidence to express themselves through their unique
-              style.
-            </p>
-          </div>
+    <div className="eyewear-wrapper container">
+      <motion.div
+        className="eyewear-grid"
+        initial="hidden"
+        whileInView="visible"
+        variants={containerVariants}
+      >
+        <div className="eyewear-image-section">
+          <img src={manImage} alt="New Collection" />
+          <motion.div
+            className="eyewear-overlay"
+            initial="hidden"
+            whileInView="visible"
+            variants={overlayVariants}
+          >
+            <h2>New Collection</h2>
+            <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum.</p>
+            <Link to="/shop"><button>Shop Now!</button></Link>
+          </motion.div>
+        </div>
 
-          <div className="about-section">
-            <h2>Our Vision</h2>
-            <p>
-              We envision a world where everyone has access to eyewear that not
-              only enhances their vision but also complements their personality.
-              Our goal is to be the leading provider of stylish and affordable
-              eyewear.
-            </p>
-          </div>
+        <div className="eyewear-text-section">
+          <span className="eyewear-label">👁️ ABOUT US</span>
+          <h1>Our Commitment to <br />Quality Eyewear</h1>
+          <p>
+            Our eyewear collection offers a blend of style and comfort for every occasion.
+            Discover frames that enhance your features and lenses that provide clarity.
+          </p>
 
-          <div className="about-section">
-            <h2>Our Values</h2>
-            <ul>
-              <li>
-                Quality: We are committed to offering only the best products.
-              </li>
-              <li>
-                Integrity: We conduct our business with honesty and
-                transparency.
-              </li>
-              <li>
-                Customer Focus: Our customers are at the heart of everything we
-                do.
-              </li>
-              <li>
-                Innovation: We continuously seek new ways to improve our
-                products and services.
-              </li>
-            </ul>
-          </div>
-        </motion.section>
-        <div className="divider"></div>
-        <div className="about-team">
-          <h2 className="text-center">Meet Our Team</h2>
-          <div className="team-members">
-            <motion.div whileHover={{scale:1.1}} className="team-member">
-              <img src={pfp} alt="Team Member 1" />
-              <h3>Tejas Pilane</h3>
-              <p>Founder & CEO</p>
+
+          <div className="eyewear-points">
+            <motion.div className="eyewear-point" variants={containerVariants}>
+              <CheckCircle className="check-icon" />
+              <div>
+                <strong>Vision Clarity</strong>
+                <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum gravida auctor.</p>
+              </div>
             </motion.div>
-            <motion.div whileHover={{scale:1.1}} className="team-member">
-              <img src={pfp} alt="Team Member 1" />
-              <h3>Tejas Pilane</h3>
-              <p>Co-Founder & CTO</p>
+            <motion.div className="eyewear-point" variants={containerVariants}>
+              <CheckCircle className="check-icon" />
+              <div>
+                <strong>Fashion and Style</strong>
+                <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum gravida auctor.</p>
+              </div>
             </motion.div>
-            <motion.div whileHover={{scale:1.1}} className="team-member">
-              <img src={pfp} alt="Team Member 1" />
-              <h3>Tejas Pilane</h3>
-              <p>Marketing Manager</p>
+            <motion.div className="eyewear-point" variants={containerVariants}>
+              <CheckCircle className="check-icon" />
+              <div>
+                <strong>Quality and Durability</strong>
+                <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum gravida auctor.</p>
+              </div>
             </motion.div>
           </div>
         </div>
+      </motion.div>
+
+      <div className="eyewear-brands">
+        <h3>Over <span>92+</span> Eyewear Brand</h3>
+        {/* <div className="brand-logos">
+          <img src="/path-to/brand1.png" alt="brand" />
+          <img src="/path-to/brand2.png" alt="brand" />
+          <img src="/path-to/brand3.png" alt="brand" />
+          <img src="/path-to/brand4.png" alt="brand" />
+          <img src="/path-to/brand5.png" alt="brand" />
+        </div> */}
       </div>
     </div>
   );
-};
-
-export default About;
+}

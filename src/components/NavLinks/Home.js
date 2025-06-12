@@ -1,4 +1,5 @@
 import React from "react";
+import HeroSection from "../HeroSection";
 import Header from "../Header";
 import Slider from "../Slider";
 import About from "./About";
@@ -10,9 +11,10 @@ class Home extends React.Component {
   render() {
     return (
       <>
-        <Header />
-        <Slider />
+        <HeroSection/>
+        {/* <Slider /> */}
         <About />
+        <Header />
         <Contact />
         <Footer />
       </>

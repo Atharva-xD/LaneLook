@@ -29,7 +29,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 1140px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
@@ -296,7 +296,7 @@ body {
 }
 
 .navbar .container {
-  max-width: 1140px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
