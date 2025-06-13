@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import './Contact.css'; // Import custom styles for the Contact component
 import emailjs from '@emailjs/browser'; // Import EmailJS
 import manwithspecstwo from "./images/menwithspecstwo.png";
-import { Mail, HelpCircle, MapPin, Phone } from 'lucide-react';
+import { HelpCircle, MapPin, Phone } from 'lucide-react';
 import { Eye } from "lucide-react";
 import { LuSmile } from "react-icons/lu";
 import { motion } from 'framer-motion'; // Import Framer Motion
