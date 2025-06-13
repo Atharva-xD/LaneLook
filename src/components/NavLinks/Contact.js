@@ -32,12 +32,12 @@ const Contact = () => {
     },
     {
       question: "What types of lenses are available for glasses?",
-      answer: "Duis ullamcorper ultricies egestas orci vel sit mauris. At gravida massa auctor tortor mi porttitor."
+      answer: "We offer single vision, bifocal, progressive, and blue-light filtering lenses for various needs."
     },
     {
       question: "How do I choose the right frame for my glasses?",
-      answer: "Duis ullamcorper ultricies egestas orci vel sit mauris. At gravida massa auctor tortor mi porttitor."
-    }
+      answer: "Our stylists can help you pick frames based on your face shape, preferences, and lifestyle."
+    }    
   ];
 
   // Handle input change
@@ -198,7 +198,8 @@ const Contact = () => {
 
       {/* Contact Form */}
       <section className="form-section">
-        <h2>Send Us Your Query</h2>
+        <h2>DIDN’T FIND THE ANSWER YOU ARE LOOKING FOR?</h2>
+        <h3>Send Us Your Query</h3>
         <form ref={form} onSubmit={handleSubmit} className="contact-form">
           <input
             type="text"

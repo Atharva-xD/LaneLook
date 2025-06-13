@@ -66,7 +66,7 @@ export default function HeroSection() {
                             viewport={{ once: true }}
                             className="hero-paragraph"
                         >
-                            Purus commodo faucibus fermentum tortor suscipit morbi fringilla ac. Egestas tempus rhoncus pulvinar netus.
+                            Explore eyewear crafted to match your lifestyle — combining innovation, elegance, and all-day visual clarity.
                         </motion.p>
 
                         <motion.div

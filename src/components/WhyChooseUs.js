@@ -7,22 +7,22 @@ const features = [
   {
     id: "01",
     title: "Unparalleled Selection",
-    description: "Lorem viverra eget mauris nunc. Nullam lorem tincidunt viverra.",
+    description: "Explore a vast range of eyewear styles tailored to your unique taste and needs.",
   },
   {
     id: "02",
     title: "Premium Quality",
-    description: "Lorem viverra eget mauris nunc. Nullam lorem tincidunt viverra.",
+    description: "Our eyewear is crafted with the finest materials for durability and comfort.",
   },
   {
     id: "03",
     title: "Expert Guidance",
-    description: "Lorem viverra eget mauris nunc. Nullam lorem tincidunt viverra.",
+    description: "Receive personalized advice from our knowledgeable team of eyewear specialists.",
   },
   {
     id: "04",
     title: "Personalized Service",
-    description: "Lorem viverra eget mauris nunc. Nullam lorem tincidunt viverra.",
+    description: "Enjoy a tailored shopping experience that caters to your individual preferences.",
   },
 ];
 
@@ -45,7 +45,7 @@ export default function WhyChooseUs() {
             Discover the Benefits of <br /> Choosing Us
           </h2>
           <p className="why-paragraph">
-            Eget nam congue neque nunc vel viverra lorem massa urna. Magna proin pellentesque cras amet et. Sit in mattis quam nec tellus.
+            Experience exceptional service and quality products that enhance your vision and style.
           </p>
         </motion.div>
 

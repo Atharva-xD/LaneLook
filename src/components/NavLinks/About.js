@@ -42,7 +42,7 @@ export default function EyewearCommitment() {
             variants={overlayVariants}
           >
             <h2>New Collection</h2>
-            <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum.</p>
+            <p>Explore our newest arrivals featuring cutting-edge designs and unmatched comfort.</p>
             <Link to="/shop"><button>Shop Now!</button></Link>
           </motion.div>
         </div>
@@ -56,29 +56,30 @@ export default function EyewearCommitment() {
           </p>
 
 
-          <div className="eyewear-points">
-            <motion.div className="eyewear-point" variants={containerVariants}>
-              <CheckCircle className="check-icon" />
-              <div>
-                <strong>Vision Clarity</strong>
-                <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum gravida auctor.</p>
-              </div>
-            </motion.div>
-            <motion.div className="eyewear-point" variants={containerVariants}>
-              <CheckCircle className="check-icon" />
-              <div>
-                <strong>Fashion and Style</strong>
-                <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum gravida auctor.</p>
-              </div>
-            </motion.div>
-            <motion.div className="eyewear-point" variants={containerVariants}>
-              <CheckCircle className="check-icon" />
-              <div>
-                <strong>Quality and Durability</strong>
-                <p>Vestibulum facilisis velit amet lacus. Metus sapien eu lorem dictumst at bibendum gravida auctor.</p>
-              </div>
-            </motion.div>
-          </div>
+          <motion.div className="eyewear-point" variants={containerVariants}>
+            <CheckCircle className="check-icon" />
+            <div>
+              <strong>Vision Clarity</strong>
+              <p>Our lenses are crafted to provide maximum clarity and reduce strain for all-day wear.</p>
+            </div>
+          </motion.div>
+
+          <motion.div className="eyewear-point" variants={containerVariants}>
+            <CheckCircle className="check-icon" />
+            <div>
+              <strong>Fashion and Style</strong>
+              <p>From sleek minimalism to bold statements, find frames that match your personal vibe.</p>
+            </div>
+          </motion.div>
+
+          <motion.div className="eyewear-point" variants={containerVariants}>
+            <CheckCircle className="check-icon" />
+            <div>
+              <strong>Quality and Durability</strong>
+              <p>Built with premium materials, our eyewear is designed to withstand daily wear and last longer.</p>
+            </div>
+          </motion.div>
+
         </div>
       </motion.div>
 

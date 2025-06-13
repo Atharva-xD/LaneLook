@@ -279,15 +279,20 @@
 .form-section {
   margin-top: 60px;
   padding: 40px 20px;
-  /* background: #f3f4f6; */
+  background: #f3f4f6;
   border-radius: 12px;
   text-align: center;
 }
 
 .form-section h2 {
   font-size: 1.8rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.form-section h3 {
+  font-size: 1.3rem;
   margin-bottom: 20px;
-  font-weight: 700;
 }
 
 .contact-form {
