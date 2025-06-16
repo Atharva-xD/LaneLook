@@ -20,12 +20,18 @@ app.use('/api/orders', require('./routes/orders'));
 
 // Error handling middleware
 app.use(require('./middleware/errorHandler'));
+const PORT = config.PORT || 5000;
+
+app.get("/", async(req,res)=>{
+  res.status(200).send('Started journey');
+})
 
 // Database connection
-connectDB();
+connectDB().then(() => {
+  // Start server
+  app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+  });
+}
+);
 
-// Start server
-const PORT = config.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
